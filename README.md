@@ -19,3 +19,11 @@ Rama: introduccion-jsx
 
 Link detalles: https://ewebik.com/react-js/jsx
 
+## Capítulo 3 Manejo de compontes y propiedades
+
+En este capítulo veremos una introducción al manejo de componentes y sus propiedades, conocerás cuales son los tipos disponibles en React, como es que puedes pasar propiedades y como debieras modificarlas.
+
+Rama: componentes-y-propiedades
+
+Link detalles: https://ewebik.com/react-js/components-and-props
+

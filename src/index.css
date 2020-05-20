@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 10%;
 }
 
 code {
@@ -12,14 +13,17 @@ code {
     monospace;
 }
 
-.container{
-  background-color: black;
-  height: 120px;
+.padre{
+  text-align: center;
+  border: 1px solid #111;
+  padding: 5%;
+}
+.componentes{
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
-.style-parrafo{
-  color: #fff;
+.componente{
+  border: 1px solid #111;
+  width: 25%;
 }
