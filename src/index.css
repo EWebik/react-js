@@ -26,4 +26,18 @@ code {
 .componente{
   border: 1px solid #111;
   width: 25%;
+  margin-top: 20px;
+}
+
+.controles{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.control{
+  border: 1px solid #111;
+  padding: 10px;
+}
+.control:hover{
+  cursor: pointer;
 }

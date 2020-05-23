@@ -27,3 +27,11 @@ Rama: componentes-y-propiedades
 
 Link detalles: https://ewebik.com/react-js/components-and-props
 
+## Capítulo 4 Manejo del State y ciclo de vida
+
+En este capítulo te mostrare como declarar, asignar y manipular el State tanto en componentes de clase como funcionales, veremos una introducción a los métodos de ciclo de vida comenzando con componentDidMount y componentWillUnmount.
+
+Rama: state-lifecycle
+
+Link detalles: https://ewebik.com/react-js/state-and-lifecycle
+
