@@ -1,227 +1,153 @@
-import React,{useState} from 'react';
+import React,{useState,useRef} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-//Manejo de State
+import Chart from "chart.js";
 
-//this
-class Hijo1 extends React.Component{
-
-  //Si lo declaras de esta forma
-  //Recomiendo utilizar funciones de flecha
-  state={
-    titulo:"Hijo 1",
-    subtitulo:"Contador",
-    cuenta:1
-  }
-
-  constructor(props){
-    super(props);
-    //Declaración métodos de clase
-    this.disminuir = this.disminuir.bind(this);
-
-    //DECLARACIÓN
-    /*
-    this.state={
-      titulo:"Hijo 1",
-      subtitulo:"Contador",
-      cuenta:1
-    }
-    */
-  }
-
-  //Método de clase
-  //No heredan el this
-  //La forma oficial y recomendada
-  disminuir(){
-    //this.state.cuenta--;
-    //this.forceUpdate(); //NO ES RECOMENDABLE
-    if(this.state.cuenta <= 0){
-      this.setState({
-        ...this.state,
-        cuenta:0
-      });
-    }else{
-      this.setState({
-        ...this.state,
-        cuenta:this.state.cuenta - 1
-      });
-    }
-    console.log(this.state)
-  }
-
-  //Método tipo función de flecha
-  //Heredan el this
-  //Esto es posible gracias a Babel
-  aumentar=()=>{
-    this.setState({
-      ...this.state,
-      cuenta:this.state.cuenta + 1
-    });
-  }
- 
-  render(){
-    return(
-      <div className="componente">
-        <h2>{this.state.titulo}</h2>
-        <p>{this.state.subtitulo}</p>
-        <div className="controles">
-          <span 
-            className="control"
-            onClick={this.disminuir}>-</span>
-          <span 
-            className="control"
-            onClick={this.aumentar}>+</span>
-        </div>
-        <p>{this.state.cuenta}</p>
-      </div>
-    );
-  }
-}
-
-//Hook useState
-function Hijo2 (props){
-  //Declaración
-  const [state, setState] = useState({
-    titulo:"Hijo 2",
-    subtitulo:"Contador",
-    cuenta:1
-  });
-
-  const disminuir = ()=>{
-    if(state.cuenta <= 0){
-      setState({
-        ...state,
-        cuenta:0
-      });
-    }else{
-      setState({
-        ...state,
-        cuenta:state.cuenta - 1
-      });
-    }
-  }
-
-  const aumentar = ()=>{
-    setState({
-      ...state,
-      cuenta:state.cuenta + 1
-    });
-  }
-
-  return(
-    <div className="componente">
-      <h2>{state.titulo}</h2>
-      <p>{state.subtitulo}</p>
-      <div className="controles">
-          <span 
-            className="control"
-            onClick={disminuir}>-</span>
-          <span 
-            className="control"
-            onClick={aumentar}>+</span>
-        </div>
-      <p>{state.cuenta}</p>
-    </div>
-  );
-}
-
-//UN COMPONENTE NO DEBE MODIFICAR SUS PROPIEDADES
-let propiedades = {
-  hijo1:{ 
-    titulo:"Hijo 1",
-    subtitulo:"Contador",
-    cuenta:1
-  },
-  hijo2:{ 
-    titulo:"Hijo 2",
-    subtitulo:"Contador",
-    cuenta:1
-  }
-};
-
-
-function Padre(props){
-  console.log(props);
-  return(
-    <div className="padre">
-      <h1>{"Componente Padre"}</h1>
-      <div className="componentes">
-       <Hijo1 {...props.hijo1} />
-       <Hijo2 {...props.hijo2} />
-      </div>
-    </div>
-  );
-}
-
-
-//Métodos de ciclo de vida
-//componentDidMount
-//componentWillUnmount
-
-class Hijo extends React.Component{
-
-  //Si lo declaras de esta forma
-  //Recomiendo utilizar funciones de flecha
-  state={
-    titulo:"Hijo 1",
-    subtitulo:"Contador",
-    cuenta:1
-  }
+//Refs React en componentes de clase
+class Componente extends React.Component{
 
   intervalo = null;
 
+  constructor(props){
+    super(props);
+    //Creando una referencia
+    this.referencia = React.createRef();
+    this.state = {
+      mensaje:["C","u","r","s","o"," ","d","e"," ","R","e","a","c","t"," ","J","S"," ","b","y"," ","E","W","e","b","i","k"]
+    }
+  }
   componentDidMount(){
-    console.log("componentDidMount")
+    console.log(this.referencia);
+    let contador = 0;
+    let strMensaje="";
+    let mensaje = this.state.mensaje;
     this.intervalo = setInterval(()=>{
-      this.setState({
-        cuenta:this.state.cuenta + 1
-      })
-      console.log(this.state)
-    },1000)
+      strMensaje += mensaje[contador];
+      //Esto es equivalente document.getElementById
+      this.referencia.current.innerText = strMensaje;
+      contador++;
+      if(contador >= mensaje.length){
+        strMensaje="";
+        contador=0;
+      }
+    },200);
   }
-
-  componentWillUnmount(){
-    console.log("componentWillUnmount")
-    clearInterval(this.intervalo);
-  }
-
   render(){
     return(
-      <div className="componente">
-        <h2>{this.state.titulo}</h2>
-        <p>{this.state.subtitulo}</p>
-        <p>{this.state.cuenta}</p>
+      <div>
+        <h1 ref={this.referencia}>Curso de React JS by EWebik</h1>
       </div>
-    );
+    )
   }
 }
 
-function Padre1(props){
-  const [ver,setVer] = useState(false)
-  const verComponente = ()=>{
-    setVer(!ver)
+//Refs React en componentes funcionales
+//Hook useRef
+function Componente1(props){
+  const [ini,setIni] = useState(true);
+  const [state,setState] = useState({
+    mensaje: ["C","u","r","s","o"," ","d","e"," ","R","e","a","c","t"," ","J","S"," ","b","y"," ","E","W","e","b","i","k"]
+  });
+
+  const referencia = useRef(); // React.createRef();
+
+  const animacion = ()=>{
+    let contador = 0;
+    let strMensaje="";
+    let mensaje = state.mensaje;
+    setInterval(()=>{
+      strMensaje += mensaje[contador];
+      //Esto es equivalente document.getElementById
+      referencia.current.innerText = strMensaje;
+      contador++;
+      if(contador >= mensaje.length){
+        strMensaje="";
+        contador=0;
+      }
+    },100);
   }
+
+  if(ini){
+    setIni(false);
+    animacion();
+  }
+
   return(
-    <div className="padre">
-      <h1>{"Componente Padre"}</h1>
-      <button onClick={verComponente}>{ver ? "Ocultar":"ver"}</button>
-      <div className="componentes">
-       {
-         ver ? (<Hijo />):("")
-       }
-      </div>
+    <div>
+      <h1 ref={referencia}>Curso de React JS by EWebik</h1>
     </div>
-  );
+  )
 }
 
+//Refs React y librerías de terceros
+//Chart.js
+class Componente2 extends React.Component{
+  constructor(props){
+    super(props);
+    this.referencia = React.createRef();
+  }
+
+  componentDidMount(){
+    //var ctx = document.getElementById('myChart');
+    var ctx = this.referencia.current;
+    console.log(ctx)
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+              label: '# of Votes',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+  });
+  }
+  render(){
+    return(
+      <div>
+        <h1>Curso de React JS by EWebik</h1>
+        <canvas 
+          id="myChart"
+          ref={this.referencia}
+          style={{width:400, height:400}}></canvas>
+      </div>
+    )
+  }
+}
 
 
 
 ReactDOM.render(
-  <Padre1 />,
+  <Componente2/>,
   document.getElementById('root')
 );
 // If you want your app to work offline and load faster, you can change

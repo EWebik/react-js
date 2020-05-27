@@ -35,3 +35,11 @@ Rama: state-lifecycle
 
 Link detalles: https://ewebik.com/react-js/state-and-lifecycle
 
+## Capítulo 5 Manejo de Refs en React
+
+En este capítulo aprenderás el correcto manejo de las referencias, esto es equivalente a utilizar document.getElementById, no obstante, la librería de React nos proporciona esta opción para usarla y poder integrarla con librería de terceros.
+
+Rama: refs
+
+Link detalles: https://ewebik.com/react-js/refs
+
