@@ -43,3 +43,12 @@ Rama: refs
 
 Link detalles: https://ewebik.com/react-js/refs
 
+## Capítulo 6 Manejo de Listas y Keys en React
+
+En este nuevo capítulo aprenderás a recorrer y extraer datos de una lista en React utilizando la función map, además, veremos la importancia de utilizar Keys y agregárselas a nuestros elementos durante la extracción de datos.
+
+Rama: list-and-keys
+
+Link detalles: https://ewebik.com/react-js/lists-and-keys
+
+

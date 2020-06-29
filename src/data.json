@@ -1,0 +1,92 @@
+[
+    {
+      "id": 0,
+      "nombre": "Producto1",
+      "categoria": "categoria1",
+      "precio": 873.6480742,
+      "cantidad_vendidos": 376,
+      "en_almacen": 855,
+      "fecha_alta": "2019-01-01"
+    },
+    {
+      "id": 1,
+      "nombre": "Producto2",
+      "categoria": "categoria2",
+      "precio": 1051.610471,
+      "cantidad_vendidos": 675,
+      "en_almacen": 894,
+      "fecha_alta": "2019-01-01"
+    },
+    {
+      "id": 2,
+      "nombre": "Producto3",
+      "categoria": "categoria3",
+      "precio": 641.4193006,
+      "cantidad_vendidos": 292,
+      "en_almacen": 737,
+      "fecha_alta": "2019-01-01"
+    },
+    {
+      "id": 3,
+      "nombre": "Producto4",
+      "categoria": "categoria4",
+      "precio": 866.4112082,
+      "cantidad_vendidos": 490,
+      "en_almacen": 340,
+      "fecha_alta": "2019-01-01"
+    },
+    {
+      "id": 4,
+      "nombre": "Producto5",
+      "categoria": "categoria5",
+      "precio": 422.2674706,
+      "cantidad_vendidos": 532,
+      "en_almacen": 825,
+      "fecha_alta": "2019-01-01"
+    },
+    {
+      "id": 5,
+      "nombre": "Producto6",
+      "categoria": "categoria6",
+      "precio": 1074.839283,
+      "cantidad_vendidos": 202,
+      "en_almacen": 224,
+      "fecha_alta": "2019-01-01"
+    },
+    {
+      "id": 6,
+      "nombre": "Producto7",
+      "categoria": "categoria7",
+      "precio": 798.5192373,
+      "cantidad_vendidos": 605,
+      "en_almacen": 322,
+      "fecha_alta": "2019-01-01"
+    },
+    {
+      "id": 7,
+      "nombre": "Producto8",
+      "categoria": "categoria8",
+      "precio": 771.6845537,
+      "cantidad_vendidos": 191,
+      "en_almacen": 409,
+      "fecha_alta": "2019-01-01"
+    },
+    {
+      "id": 8,
+      "nombre": "Producto9",
+      "categoria": "categoria9",
+      "precio": 694.6784187,
+      "cantidad_vendidos": 660,
+      "en_almacen": 173,
+      "fecha_alta": "2019-01-01"
+    },
+    {
+      "id": 9,
+      "nombre": "Producto10",
+      "categoria": "categoria10",
+      "precio": 1052.182809,
+      "cantidad_vendidos": 253,
+      "en_almacen": 822,
+      "fecha_alta": "2019-01-01"
+    }
+]

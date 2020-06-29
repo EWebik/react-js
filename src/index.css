@@ -41,3 +41,40 @@ code {
 .control:hover{
   cursor: pointer;
 }
+
+.centrar{
+  text-align: center;
+}
+
+.cont-tabla{
+  text-align: center;
+  padding: 10px;
+}
+.cont-tabla table{
+  width: 100%;
+  border-collapse: collapse;
+}
+.cont-tabla th{
+  height: 50px;
+  background-color: blue;
+  color: #fff;
+  font-size: 18px;
+  padding: 5px 10px;
+}
+.cont-tabla td{
+  height: 50px;
+  border: 1px solid cadetblue;
+  padding: 5px 10px;
+}
+.trColor{
+  background-color: cadetblue;
+  color: #fff;
+}
+.trColor td{
+  border: 1px solid #fff;
+}
+@media (max-width:720px){
+  .cont-tabla{
+    overflow-x: scroll;
+  }
+}
