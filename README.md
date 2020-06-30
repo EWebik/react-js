@@ -51,4 +51,11 @@ Rama: list-and-keys
 
 Link detalles: https://ewebik.com/react-js/lists-and-keys
 
+## Capítulo 7 Manejo de Formularios en React
+
+En esta nueva clase vamos a revisar el manejo de formularios en React, aprenderás a utilizar inputs controlados e inputs no controlados, además, haremos un formulario con validaciones y listo para agregarlo a algún proyecto que estés desarrollado en este momento.
+
+Rama: formularios
+
+Link detalles: https://ewebik.com/react-js/formularios
 
