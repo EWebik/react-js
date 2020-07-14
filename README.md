@@ -59,3 +59,20 @@ Rama: formularios
 
 Link detalles: https://ewebik.com/react-js/formularios
 
+## Capítulo 8 React Developer Tools
+
+En esta clase aprenderás a utilizar una herramienta con la cual podrás desarrollar más rápido tu código, ya que, podrás observar los cambios en las props y el state de tus componentes sin la necesidad de realizar console.log. No hay rama para este vídeo ya que solo se explica el funcionamiento de esta herramienta.
+
+Rama: -
+
+Link detalles: https://ewebik.com/react-js/developer-tools
+
+## Capítulo 9 Comunicación de componentes con API Context
+
+En este capítulo te enseñaré a través de un ejemplo, cómo comunicar componentes a través de API Context React. Podrás visualizar como el árbol de componentes se actualiza y eres capaz de conocer que componente a realizado dicho cambio.
+
+Rama: api-context
+
+Link detalles: https://ewebik.com/react-js/api-context
+
+
