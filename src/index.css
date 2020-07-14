@@ -14,103 +14,43 @@ code {
 }
 
 .padre{
+  position: relative;
   text-align: center;
   border: 1px solid #111;
-  padding: 5%;
+  padding: 5px;
 }
-.componentes{
+
+.hijos{
+  margin: 20px 0px;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-.componente{
-  border: 1px solid #111;
-  width: 25%;
-  margin-top: 20px;
-}
 
-.controles{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.control{
-  border: 1px solid #111;
-  padding: 10px;
-}
-.control:hover{
-  cursor: pointer;
-}
-
-.centrar{
+.hijo{
   text-align: center;
+  border: 1px solid #111;
+  padding: 5px;
+  margin: 0px 10px;
+  width: 90%;
 }
 
-.cont-tabla{
-  text-align: center;
-  padding: 10px;
-}
-.cont-tabla table{
-  width: 100%;
-  border-collapse: collapse;
-}
-.cont-tabla th{
-  height: 50px;
-  background-color: blue;
-  color: #fff;
-  font-size: 18px;
-  padding: 5px 10px;
-}
-.cont-tabla td{
-  height: 50px;
-  border: 1px solid cadetblue;
-  padding: 5px 10px;
-}
-.trColor{
-  background-color: cadetblue;
-  color: #fff;
-}
-.trColor td{
-  border: 1px solid #fff;
-}
-@media (max-width:720px){
-  .cont-tabla{
-    overflow-x: scroll;
-  }
+.padre textarea,
+.hijo textarea{
+  width: 90%;
 }
 
-.componente-input{
-  display: flex;
-  flex-direction: column;
-  margin: 10px 0px;
+.colorPadre{
+  color: blue;
+  font-weight: bold;
 }
-.componente-input label{
-  margin: 5px 0px;
-  font-size: 18px;
-}
-.componente-input input
-,.componente-input select{
-  height: 45px;
-  font-size: 18px;
-}
-.componente-input-error{
+
+.colorHijo1{
   color: red;
-  font-size: 16px;
-}
-.border-error{
-  border: 1px solid red;
-}
-.button{
-  background-color: royalblue;
-  padding: 10px;
   font-weight: bold;
-  font-size: 18px;
-  color: #fff;
 }
-.button-disable{
-  background-color: darkgray;
-  padding: 10px;
+
+.colorHijo2{
+  color: green;
   font-weight: bold;
-  font-size: 18px;
-  color: #fff;
 }
