@@ -5,52 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: 10%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-.padre{
-  position: relative;
-  text-align: center;
-  border: 1px solid #111;
-  padding: 5px;
-}
-
-.hijos{
-  margin: 20px 0px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.hijo{
-  text-align: center;
-  border: 1px solid #111;
-  padding: 5px;
-  margin: 0px 10px;
-  width: 90%;
-}
-
-.padre textarea,
-.hijo textarea{
-  width: 90%;
-}
-
-.colorPadre{
-  color: blue;
-  font-weight: bold;
-}
-
-.colorHijo1{
-  color: red;
-  font-weight: bold;
-}
-
-.colorHijo2{
-  color: green;
-  font-weight: bold;
 }

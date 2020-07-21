@@ -75,4 +75,11 @@ Rama: api-context
 
 Link detalles: https://ewebik.com/react-js/api-context
 
+## Capítulo 10 Comunicación de componentes con High Order Component (HOC)
+
+En este capítulo te enseñaré a través de un ejemplo como utilizar los HOC, los cuales son muy útiles cuando tenemos procesos o cálculos, que se deben realizar en varios componentes dentro de nuestro proyecto.
+
+Rama: hoc
+
+Link detalles: https://ewebik.com/react-js/hoc
 
