@@ -83,3 +83,11 @@ Rama: hoc
 
 Link detalles: https://ewebik.com/react-js/hoc
 
+## Capítulo 11 Comunicación de componentes mediante Children
+
+En este onceavo capítulo te enseñaré a utilizar las propiedades Children en React, aprenderás ¿Qué son? Manipularlas, y a través de un ejemplo, aprenderás como puedes comunicar componentes a través de ellas.
+
+Rama: children
+
+Link detalles: https://ewebik.com/react-js/children
+
