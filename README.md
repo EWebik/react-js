@@ -91,3 +91,11 @@ Rama: children
 
 Link detalles: https://ewebik.com/react-js/children
 
+## Capítulo 12 Validación de propiedades con PropTypes
+
+Una herramienta muy interesante en React son las PropTypes, a través de ellas, podemos comprobar que las propiedades en nuestros componentes se han asignado correctamente al ser invocados, incluso, podemos crear nuestras propias validaciones.
+
+Rama: proptypes
+
+Link detalles: https://ewebik.com/react-js/proptypes
+

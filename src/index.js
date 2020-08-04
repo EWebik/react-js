@@ -4,83 +4,67 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-//Children en React JS
-const Child1 = (props)=>{
-  return(
-    <div className="hijo">
-       <h2>{"Hijo 1"}</h2>
-       <p>{props.componente + " " + props.mensaje}</p>
-        <textarea rows="5" onChange={(e)=>{
-          props.actualizarState(e.target.value, "Hijo 1 dice:")
-        }} />
-    </div>
-   
-  )
-}
+import PropTypes from "prop-types";
 
-const Child2 = (props)=>{
-  return(
-    <div className="hijo">
-      <h2>{"Hijo 2"}</h2>
-      <p>{props.componente + " " + props.mensaje}</p>
-        <textarea rows="5" onChange={(e)=>{
-          props.actualizarState(e.target.value, "Hijo 2 dice:")
-        }} />
-  </div>
-  )
-}
+//PropTypes en React JS
 
-
-class Padre extends React.Component{
-  constructor(props){
-    super(props);
-    this.state={
-      mensaje:"",
-      componente:""
+//Componentes de clase
+class _Componente extends React.Component{
+  static propTypes = {
+    texto: PropTypes.string,
+    numero: PropTypes.number.isRequired,
+    correo: function(props, propName, componentName){
+      if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(props[propName])){
+        return new Error(
+          `Prop no cuenta con un formato de correo ${propName}, para ${componentName}. Error en la validación.`
+        )
+      }
     }
   }
-
-  actualizarState = (mensaje, componente)=>{
-    this.setState({mensaje, componente})
-  }
-
   render(){
-    const {children: propsChildren} = this.props;
-    
-    //Siempre manejes children como array
-    //Comunicación de componentes aplicando Children
-    let children = React.Children.map(propsChildren,(child, index)=>{
-      return React.cloneElement(child,{
-        mensaje: this.state.mensaje,
-        componente: this.state.componente,
-        actualizarState: this.actualizarState,
-      });
-    })
-
-    
     return(
-      <div className="padre">
-        <h1>{"Props Children by EWebik"}</h1>
-      <p>{this.state.componente + " " + this.state.mensaje}</p>
-      <textarea rows="5" onChange={(e)=>{
-        this.actualizarState(e.target.value, "Padre dice:")
-      }} />
-      <div className="hijos">
-        {
-          children
-        }
-      </div>
-       
-      </div >
+      <>
+        <p>{this.props.texto}</p>
+        <p>{this.props.numero}</p>
+        <p>{this.props.correo}</p>
+      </>
     )
   }
 }
 
+//Componentes funcionales
+const Componente = props =>{
+  return(
+    <>
+      <p>{props.texto}</p>
+      <p>{props.numero}</p>
+      <p>{props.correo}</p>
+    </>
+  )
+}
+
+Componente.propTypes = {
+  texto: PropTypes.string,
+  numero: PropTypes.number.isRequired,
+  correo: function(props, propName, componentName){
+    if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(props[propName])){
+      return new Error(
+        `Prop no cuenta con un formato de correo ${propName}, para ${componentName}. Error en la validación.`
+      )
+    }
+  }
+}
+
+//Valores por default
+Componente.defaultProps ={
+  texto:"EWebik default",
+  numero:10,
+  correo:"contacto@ewebik.com.mx"
+}
+
+
 ReactDOM.render(
-  <Padre>
-    <Child1/>
-    <Child2/>
-  </Padre>,
+  <Componente />,
   document.getElementById('root')
 );
 // If you want your app to work offline and load faster, you can change
