@@ -16,7 +16,7 @@ const Componente = (props)=>{
   //const _state = state[0];
   //const setState = state[1]; //función
 
-  //Declaración por destructuración
+  //Declaración por desestructuración
   //const [state, setState] = useState();
 
   //Reglas de los Hooks
