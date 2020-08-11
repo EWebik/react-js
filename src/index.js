@@ -4,62 +4,94 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import PropTypes from "prop-types";
+//Hook de estado useState
 
-//PropTypes en React JS
 
-//Componentes de clase
-class _Componente extends React.Component{
-  static propTypes = {
-    texto: PropTypes.string,
-    numero: PropTypes.number.isRequired,
-    correo: function(props, propName, componentName){
-      if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(props[propName])){
-        return new Error(
-          `Prop no cuenta con un formato de correo ${propName}, para ${componentName}. Error en la validación.`
-        )
-      }
+
+const Componente = (props)=>{
+
+  //Declaración
+  //const state = React.useState();
+  //useState regresa un array
+  //const _state = state[0];
+  //const setState = state[1]; //función
+
+  //Declaración por destructuración
+  //const [state, setState] = useState();
+
+  //Reglas de los Hooks
+  //1- Se deben declarar en el primer nivel del componente
+  //2- Los Hooks solo deben ser llamados desde funciones de React
+
+  //Declarar un Hook por cada variable de estado que necesitemos
+  //enteros, texto, booleanos
+  //La inicialización solo ocurre cuando se monta el componente
+  const [enteros, setEnteros] = useState(0);
+  const [texto, setTexto] = useState("EWebik");
+  const [booleanos, setBooleanos] = useState(true);
+
+  //Un objeto JSON
+  const [_json, setJson] = useState({
+    enteros:0,
+    texto:"EWebik",
+    booleanos:true,
+  });
+
+  //Listas
+  const [lista, setLista] = useState([
+    {
+      item:0
+    },
+    {
+      item:1
     }
-  }
-  render(){
-    return(
-      <>
-        <p>{this.props.texto}</p>
-        <p>{this.props.numero}</p>
-        <p>{this.props.correo}</p>
-      </>
-    )
-  }
-}
+  ]);
 
-//Componentes funcionales
-const Componente = props =>{
   return(
-    <>
-      <p>{props.texto}</p>
-      <p>{props.numero}</p>
-      <p>{props.correo}</p>
-    </>
+    <div>
+      <p>{_json.enteros}</p>
+      <button onClick={()=>{
+        setJson({
+          ..._json,
+          enteros: _json.enteros + 1
+        });
+      }}>Clic</button>
+      <p>{_json.texto}</p>
+      <input type="text" onChange={(e)=>{
+         setJson({
+          ..._json,
+          texto: e.target.value
+        });
+      }} />
+      <p>{_json.booleanos ? "True":"False"}</p>
+      <input type="checkbox" onChange={(e)=>{
+        setJson({
+          ..._json,
+          booleanos: e.target.checked
+        });
+      }} />
+      <br/>
+      <button onClick={()=>{
+        let tLista = lista;
+        tLista.push({
+          item: lista.length
+        });
+        setLista(tLista);
+        console.log(tLista);
+        //setTimeout(() => {
+          setBooleanos(!booleanos);  
+        //}, 100);
+        
+      }}>Agregar</button>
+      <ul>
+        {
+          lista.map((item,index)=>(
+            <li key={index}>{item.item}</li>
+          ))
+        }
+      </ul>
+    </div>
   )
-}
-
-Componente.propTypes = {
-  texto: PropTypes.string,
-  numero: PropTypes.number.isRequired,
-  correo: function(props, propName, componentName){
-    if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(props[propName])){
-      return new Error(
-        `Prop no cuenta con un formato de correo ${propName}, para ${componentName}. Error en la validación.`
-      )
-    }
-  }
-}
-
-//Valores por default
-Componente.defaultProps ={
-  texto:"EWebik default",
-  numero:10,
-  correo:"contacto@ewebik.com.mx"
 }
 
 
