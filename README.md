@@ -75,4 +75,43 @@ Rama: api-context
 
 Link detalles: https://ewebik.com/react-js/api-context
 
+## Capítulo 10 Comunicación de componentes con High Order Component (HOC)
+
+En este capítulo te enseñaré a través de un ejemplo como utilizar los HOC, los cuales son muy útiles cuando tenemos procesos o cálculos, que se deben realizar en varios componentes dentro de nuestro proyecto.
+
+Rama: hoc
+
+Link detalles: https://ewebik.com/react-js/hoc
+
+## Capítulo 11 Comunicación de componentes mediante Children
+
+En este onceavo capítulo te enseñaré a utilizar las propiedades Children en React, aprenderás ¿Qué son? Manipularlas, y a través de un ejemplo, aprenderás como puedes comunicar componentes a través de ellas.
+
+Rama: children
+
+Link detalles: https://ewebik.com/react-js/children
+
+## Capítulo 12 Validación de propiedades con PropTypes
+
+Una herramienta muy interesante en React son las PropTypes, a través de ellas, podemos comprobar que las propiedades en nuestros componentes se han asignado correctamente al ser invocados, incluso, podemos crear nuestras propias validaciones.
+
+Rama: proptypes
+
+Link detalles: https://ewebik.com/react-js/proptypes
+
+## Capítulo 13 Introducción a los Hooks, useState o Hook de estado
+
+En esta clase comenzaremos a ver ¿Qué son los Hooks en React? Desde una perspectiva más profunda y a detalle, comenzaremos con el Hook de estado, y aunque ya hemos visto anteriormente, lo vamos a ver con más calma y a detalle.
+
+Rama: usestate
+
+Link detalles: https://ewebik.com/react-js/usestate
+
+## Capítulo 14 ¿Cómo utilizar el Hook de efecto useEffect?
+
+En esta clase analizaremos el uso del Hook useEffect, aprenderemos a declararlo, como separar procesos y mejorar el rendimiento de nuestras aplicaciones al establecer cual useEffect debe ejecutarse y cual no.
+
+Rama: useeffect
+
+Link detalles: https://ewebik.com/react-js/useeffect
 
