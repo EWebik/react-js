@@ -107,3 +107,11 @@ Rama: usestate
 
 Link detalles: https://ewebik.com/react-js/usestate
 
+## Capítulo 14 ¿Cómo utilizar el Hook de efecto useEffect?
+
+En esta clase analizaremos el uso del Hook useEffect, aprenderemos a declararlo, como separar procesos y mejorar el rendimiento de nuestras aplicaciones al establecer cual useEffect debe ejecutarse y cual no.
+
+Rama: useeffect
+
+Link detalles: https://ewebik.com/react-js/useeffect
+

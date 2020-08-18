@@ -1,99 +1,81 @@
-import React,{useState,useRef} from 'react';
+import React,{useState,useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-//Hook de estado useState
+//Hook de efecto o useEffect
 
+const Hijo = (props)=>{
+  const [contador, setContador] = useState(0);
+  const [latitud, setLatitud] = useState(0);
+  const [longitud, setLongitud] = useState(0);
 
+  //Consejo 1 - Separar procesos
+  //Consejo 2 - Mejorar rendimiento separando efectos
 
-const Componente = (props)=>{
+  //Ejemplo donde no requiere saneamiento
+  useEffect(()=>{
+    //Emular los métodos de ciclo de vida
+    //componentDidMount
+    //componentDidUpdate
 
-  //Declaración
-  //const state = React.useState();
-  //useState regresa un array
-  //const _state = state[0];
-  //const setState = state[1]; //función
+    console.log("componentDidMount");
+    console.log("componentDidUpdate");
 
-  //Declaración por destructuración
-  //const [state, setState] = useState();
+    //Posición
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition((pos)=>{
+        setLatitud(pos.coords.latitude.toFixed(0));
+        setLongitud(pos.coords.longitude.toFixed(0));
+      });
+    }else{
+      console.log("El navegador no soporta la geolocalización");
+    }  
+  },[latitud,longitud]);
 
-  //Reglas de los Hooks
-  //1- Se deben declarar en el primer nivel del componente
-  //2- Los Hooks solo deben ser llamados desde funciones de React
+  //Ejemplo donde si requiere saneamiento
+  useEffect(()=>{
+    //Contador
+    const intervalo = setInterval(() => {
+      console.log("Intervalo...")
+      setContador(contador + 1);
+    }, 1000);
 
-  //Declarar un Hook por cada variable de estado que necesitemos
-  //enteros, texto, booleanos
-  //La inicialización solo ocurre cuando se monta el componente
-  const [enteros, setEnteros] = useState(0);
-  const [texto, setTexto] = useState("EWebik");
-  const [booleanos, setBooleanos] = useState(true);
-
-  //Un objeto JSON
-  const [_json, setJson] = useState({
-    enteros:0,
-    texto:"EWebik",
-    booleanos:true,
-  });
-
-  //Listas
-  const [lista, setLista] = useState([
-    {
-      item:0
-    },
-    {
-      item:1
+    return ()=>{
+      //componentWillUnmount
+      console.log("componentWillUnmount");
+      clearInterval(intervalo);
     }
-  ]);
+  },[contador])
 
   return(
     <div>
-      <p>{_json.enteros}</p>
-      <button onClick={()=>{
-        setJson({
-          ..._json,
-          enteros: _json.enteros + 1
-        });
-      }}>Clic</button>
-      <p>{_json.texto}</p>
-      <input type="text" onChange={(e)=>{
-         setJson({
-          ..._json,
-          texto: e.target.value
-        });
-      }} />
-      <p>{_json.booleanos ? "True":"False"}</p>
-      <input type="checkbox" onChange={(e)=>{
-        setJson({
-          ..._json,
-          booleanos: e.target.checked
-        });
-      }} />
-      <br/>
-      <button onClick={()=>{
-        let tLista = lista;
-        tLista.push({
-          item: lista.length
-        });
-        setLista(tLista);
-        console.log(tLista);
-        //setTimeout(() => {
-          setBooleanos(!booleanos);  
-        //}, 100);
-        
-      }}>Agregar</button>
-      <ul>
-        {
-          lista.map((item,index)=>(
-            <li key={index}>{item.item}</li>
-          ))
-        }
-      </ul>
+       <p>{contador}</p>
+       <p>{`Lat: ${latitud}, Lon: ${longitud}`}</p>
     </div>
   )
 }
 
+const Componente = (props)=>{
+  const [verHijo, setVerHijo] = useState(true);
+  
+  //Declaración
+  //useEffect(()=>{},[]);
+
+  return(
+    <div className="padre">
+     <h1>{"Hook useEffect by EWebik"}</h1>
+     {
+       verHijo ? (<Hijo />):("")
+     }
+     <br/>
+     <button onClick={()=>{
+          setVerHijo(!verHijo);
+     }}>{verHijo ? "Ocultar":"Ver"}</button>
+    </div>
+  )
+}
 
 ReactDOM.render(
   <Componente />,
