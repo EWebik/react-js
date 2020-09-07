@@ -115,3 +115,11 @@ Rama: useeffect
 
 Link detalles: https://ewebik.com/react-js/useeffect
 
+## Capítulo 15 ¿Cómo utilizar el Hook useContext?
+
+En esta clase vamos a actualizar el ejemplo que hicimos en el capítulo 9 API Context, pero lo haremos a través del Hook useContext, con el cual podrás comunicar tus componentes a través del contexto, pero tu código se verá más limpio y fácil de leer.
+
+Rama: usecontext
+
+Link detalles: https://ewebik.com/react-js/usecontext
+
