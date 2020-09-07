@@ -1,51 +1,46 @@
-import React,{useState,useRef} from 'react';
+import React,{useState,useRef, useContext} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-//Introducción API Context React
+//Hook useContext
 
 //DECLARACIÓN
-const {Provider, Consumer} = React.createContext();
+const Context = React.createContext();
 
 
 const Hijo1 = (props)=>{
+  const {mensaje, index, actualizarMensaje} = useContext(Context);
   return(
-    <Consumer>
+    <div className="hijo">
+      <h2>Hijo 1</h2>
       {
-        ({mensaje, index, actualizarMensaje}) =>(
-          <div className="hijo">
-            <h2>Hijo 1</h2>
-            {
-              mensaje !== "" ?(
-                <p className={
-                  index === 0 ? 'colorPadre':
-                  index === 1 ? 'colorHijo1':
-                  index === 2 ? 'colorHijo2':''
-                }>{
-                  ((index === 0 ? 'Padre dice:':
-                    index === 1 ? 'Hijo 1 dice:':
-                    index === 2 ? 'Hijo 2 dice:':'')
-                    + ' ' + mensaje)
-                }</p>
-              ):("")
-            }
-            <textarea
-              rows="5"
-              onChange={(e)=>{
-                actualizarMensaje(e,1);
-              }} />
-          </div>
-        )
+        mensaje !== "" ?(
+          <p className={
+            index === 0 ? 'colorPadre':
+            index === 1 ? 'colorHijo1':
+            index === 2 ? 'colorHijo2':''
+          }>{
+            ((index === 0 ? 'Padre dice:':
+              index === 1 ? 'Hijo 1 dice:':
+              index === 2 ? 'Hijo 2 dice:':'')
+              + ' ' + mensaje)
+          }</p>
+        ):("")
       }
-    </Consumer>
+      <textarea
+        rows="5"
+        onChange={(e)=>{
+          actualizarMensaje(e,1);
+        }} />
+    </div>
   )
 }
 
 const Hijo2 = (props)=>{
   return(
-    <Consumer>
+    <Context.Consumer>
     {
       ({mensaje, index, actualizarMensaje}) =>(
         <div className="hijo">
@@ -72,7 +67,7 @@ const Hijo2 = (props)=>{
         </div>
       )
     }
-    </Consumer>
+    </Context.Consumer>
   )
 }
 
@@ -96,7 +91,7 @@ class Padre extends React.Component{
 
   render(){
     return(
-      <Provider value={{
+      <Context.Provider value={{
         mensaje: this.state.mensaje,
         index: this.state.index,
         actualizarMensaje:this.actualizarMensaje
@@ -127,7 +122,7 @@ class Padre extends React.Component{
             <Hijo2 />
           </div>
         </div>
-      </Provider>
+      </Context.Provider>
     )
   }
 }
