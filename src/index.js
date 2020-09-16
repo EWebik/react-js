@@ -1,134 +1,111 @@
-import React,{useState,useRef, useContext} from 'react';
+import React,{useReducer, useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-//Hook useContext
+//Hook useReducer
 
-//DECLARACIÓN
-const Context = React.createContext();
+//Estado inicial
+const initialState = {
+  count:0,
+  countInterval:1,
+  increment:true
+}
 
-
-const Hijo1 = (props)=>{
-  const {mensaje, index, actualizarMensaje} = useContext(Context);
-  return(
-    <div className="hijo">
-      <h2>Hijo 1</h2>
-      {
-        mensaje !== "" ?(
-          <p className={
-            index === 0 ? 'colorPadre':
-            index === 1 ? 'colorHijo1':
-            index === 2 ? 'colorHijo2':''
-          }>{
-            ((index === 0 ? 'Padre dice:':
-              index === 1 ? 'Hijo 1 dice:':
-              index === 2 ? 'Hijo 2 dice:':'')
-              + ' ' + mensaje)
-          }</p>
-        ):("")
+//Reducer, el cual debe cumplir con las características de una función pura
+const reducer = (state, action)=>{
+  switch (action.type) {
+    case "INCREMENT":
+      return{
+        ...state,
+        increment: action.increment
       }
-      <textarea
-        rows="5"
-        onChange={(e)=>{
-          actualizarMensaje(e,1);
-        }} />
+    case "SET_INTERVAL":
+      return{
+        ...state,
+        countInterval: parseInt(action.countInterval)
+      }
+    case "INCREASE_COUNT":
+      return{
+        ...state,
+        count: state.count + state.countInterval
+      }
+    case "DECREASE_COUNT":
+      return{
+        ...state,
+        count: state.count - state.countInterval
+      }
+    case "RESTART":
+      return initialState;
+    default:
+      //Lanzar un error
+      return state;
+  }
+}
+
+const Counter = ()=>{
+  //Declaración
+  //const [state, dispatch] = useReducer(()=>{},{});
+  const [state, dispatch] = useReducer(reducer,initialState);
+
+  const handleIncrement = (e)=>{
+    const {checked}=e.target;
+    dispatch({type:"INCREMENT",increment:checked});
+  }
+  const handleCountInterval = (e)=>{
+    const {value}=e.target;
+    dispatch({type:"SET_INTERVAL",countInterval:value});
+  }
+  const handleCount = (e)=>{
+    if(state.increment){
+      dispatch({type:"INCREASE_COUNT"});
+    }else{
+      dispatch({type:"DECREASE_COUNT"});
+    }
+  }
+  const handleRestart = (e)=>{
+    dispatch({type:"RESTART"});
+  }
+
+  return(
+    <div className="padre">
+      <h1>{"Hook useReducer by EWebik"}</h1>
+      <p>{"Cuenta: " + state.count}</p>
+      <div>
+        <input
+          type="checkbox"
+          id="chk"
+          checked={state.increment}
+          onChange={handleIncrement} />
+        <label htmlFor="chk">
+          {"Incrementar"}
+        </label>
+      </div>
+      <br/>
+      <div>
+        <label htmlFor="interval">
+          {"Intervalo"}
+        </label>
+        <input
+          type="text"
+          id="interval"
+          value={state.countInterval}
+          onChange={handleCountInterval} />
+      </div>
+      <br/>
+      <button onClick={handleCount}>
+        {state.increment ? "Incrementar":"Decrementar"}
+      </button>
+      <button onClick={handleRestart}>
+        {"Reiniciar"}
+      </button>
     </div>
   )
 }
 
-const Hijo2 = (props)=>{
-  return(
-    <Context.Consumer>
-    {
-      ({mensaje, index, actualizarMensaje}) =>(
-        <div className="hijo">
-          <h2>Hijo 2</h2>
-          {
-            mensaje !== "" ?(
-              <p className={
-                index === 0 ? 'colorPadre':
-                index === 1 ? 'colorHijo1':
-                index === 2 ? 'colorHijo2':''
-              }>{
-                ((index === 0 ? 'Padre dice:':
-                  index === 1 ? 'Hijo 1 dice:':
-                  index === 2 ? 'Hijo 2 dice:':'')
-                  + ' ' + mensaje)
-              }</p>
-            ):("")
-          }
-          <textarea
-            rows="5"
-            onChange={(e)=>{
-              actualizarMensaje(e,2);
-            }} />
-        </div>
-      )
-    }
-    </Context.Consumer>
-  )
-}
-
-class Padre extends React.Component{
-  constructor(props){
-    super(props)
-    this.state={
-      mensaje:"",
-      index:0
-    }
-  }
-
-  actualizarMensaje = (e, index)=>{
-    const {value} = e.target;
-    this.setState({
-      ...this.state,
-      mensaje:value,
-      index
-    })
-  }
-
-  render(){
-    return(
-      <Context.Provider value={{
-        mensaje: this.state.mensaje,
-        index: this.state.index,
-        actualizarMensaje:this.actualizarMensaje
-      }}>
-        <div className="padre">
-          <h1>EWebik - API Context</h1>
-          {
-            this.state.mensaje !== "" ?(
-              <p className={
-                this.state.index === 0 ? 'colorPadre':
-                this.state.index === 1 ? 'colorHijo1':
-                this.state.index === 2 ? 'colorHijo2':''
-              }>{
-                ((this.state.index === 0 ? 'Padre dice:':
-                  this.state.index === 1 ? 'Hijo 1 dice:':
-                  this.state.index === 2 ? 'Hijo 2 dice:':'')
-                  + ' ' + this.state.mensaje)
-              }</p>
-            ):("")
-          }
-          <textarea
-            rows="5"
-            onChange={(e)=>{
-              this.actualizarMensaje(e,0);
-            }} />
-          <div className="hijos">
-            <Hijo1 />
-            <Hijo2 />
-          </div>
-        </div>
-      </Context.Provider>
-    )
-  }
-}
-
 ReactDOM.render(
-  <Padre />,
+  <Counter />,
   document.getElementById('root')
 );
 // If you want your app to work offline and load faster, you can change

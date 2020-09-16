@@ -123,3 +123,10 @@ Rama: usecontext
 
 Link detalles: https://ewebik.com/react-js/usecontext
 
+## Capítulo 16 ¿Cómo utilizar el Hook useReducer?
+
+Hoy vamos a ver uno de los hooks adicionales más importantes, el “useReducer” un hook con el cual podrás manipular un state relativamente grande de una forma muy fácil, lo cual dará a tu código limpieza y será muy fácil de leer.
+
+Rama: usereducer
+
+Link detalles: https://ewebik.com/react-js/usereducer
