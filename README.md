@@ -123,3 +123,18 @@ Rama: usecontext
 
 Link detalles: https://ewebik.com/react-js/usecontext
 
+## Capítulo 16 ¿Cómo utilizar el Hook useReducer?
+
+Hoy vamos a ver uno de los hooks adicionales más importantes, el “useReducer” un hook con el cual podrás manipular un state relativamente grande de una forma muy fácil, lo cual dará a tu código limpieza y será muy fácil de leer.
+
+Rama: usereducer
+
+Link detalles: https://ewebik.com/react-js/usereducer
+
+## Capítulo 17 React.memo() Mejorando el rendimiento
+
+En este capítulo te enseñaré como puedes mejorar el rendimiento de tus aplicaciones, a través de, memorizar tus componentes utilizando React.memo(), además, te daré unos consejos para que le saques el máximo provecho a este HOC.
+
+Rama: react-memo
+
+Link detalles: https://ewebik.com/react-js/react-memo
