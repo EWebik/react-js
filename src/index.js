@@ -1,111 +1,100 @@
-import React,{useReducer, useState} from 'react';
+import React,{useEffect, useReducer, useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-//Hook useReducer
+//HOC React.memo()
 
-//Estado inicial
-const initialState = {
-  count:0,
-  countInterval:1,
-  increment:true
-}
-
-//Reducer, el cual debe cumplir con las características de una función pura
-const reducer = (state, action)=>{
-  switch (action.type) {
-    case "INCREMENT":
-      return{
-        ...state,
-        increment: action.increment
-      }
-    case "SET_INTERVAL":
-      return{
-        ...state,
-        countInterval: parseInt(action.countInterval)
-      }
-    case "INCREASE_COUNT":
-      return{
-        ...state,
-        count: state.count + state.countInterval
-      }
-    case "DECREASE_COUNT":
-      return{
-        ...state,
-        count: state.count - state.countInterval
-      }
-    case "RESTART":
-      return initialState;
-    default:
-      //Lanzar un error
-      return state;
-  }
-}
-
-const Counter = ()=>{
-  //Declaración
-  //const [state, dispatch] = useReducer(()=>{},{});
-  const [state, dispatch] = useReducer(reducer,initialState);
-
-  const handleIncrement = (e)=>{
-    const {checked}=e.target;
-    dispatch({type:"INCREMENT",increment:checked});
-  }
-  const handleCountInterval = (e)=>{
-    const {value}=e.target;
-    dispatch({type:"SET_INTERVAL",countInterval:value});
-  }
-  const handleCount = (e)=>{
-    if(state.increment){
-      dispatch({type:"INCREASE_COUNT"});
-    }else{
-      dispatch({type:"DECREASE_COUNT"});
-    }
-  }
-  const handleRestart = (e)=>{
-    dispatch({type:"RESTART"});
-  }
-
+const Counter = (props)=>{
+  const {counter, title}=props;
   return(
-    <div className="padre">
-      <h1>{"Hook useReducer by EWebik"}</h1>
-      <p>{"Cuenta: " + state.count}</p>
-      <div>
-        <input
-          type="checkbox"
-          id="chk"
-          checked={state.increment}
-          onChange={handleIncrement} />
-        <label htmlFor="chk">
-          {"Incrementar"}
-        </label>
-      </div>
-      <br/>
-      <div>
-        <label htmlFor="interval">
-          {"Intervalo"}
-        </label>
-        <input
-          type="text"
-          id="interval"
-          value={state.countInterval}
-          onChange={handleCountInterval} />
-      </div>
-      <br/>
-      <button onClick={handleCount}>
-        {state.increment ? "Incrementar":"Decrementar"}
-      </button>
-      <button onClick={handleRestart}>
-        {"Reiniciar"}
-      </button>
+    <div className="hijo">
+      <h2>{title}</h2>
+      <h3>{"Cuenta: " + counter}</h3>
+      <p>{"Último render: " + new Date().getMilliseconds()}</p>
     </div>
   )
 }
 
+//Declaración
+//React.memo(<Component />, ()=>{})
+
+const CounterMemo = React.memo(
+  (props)=>{
+    return(
+      <Counter {...props} />
+    )
+});
+
+//Diferenciación manual de propiedades
+//React.memo(<Component />, ()=>{})
+const CounterMemo1 = React.memo(
+  (props)=>{
+    const {data} = props;
+    return(
+      <Counter 
+        title={data.title}
+        counter={data.counter} />
+    )
+},(prevProps, nextProps)=>{
+  //Si retornamos true:  No se renderiza
+  //Si retornamos false: Si se renderiza
+  return (
+    prevProps.data.title === nextProps.data.title &&
+    prevProps.data.counter === nextProps.data.counter
+  )
+});
+
+
+const Component = ()=>{
+  const [counter1, setCounter1] = useState(0);
+  const [counter2, setCounter2] = useState(0);
+  const [counter3, setCounter3] = useState(0);
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setCounter1(counter1 + 1);
+    }, 100);
+  },[counter1]);
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setCounter2(counter2 + 1);
+    }, 4000);
+  },[counter2]);
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setCounter3(counter3 + 1);
+    }, 500);
+  },[counter3]);
+
+  return(
+    <div className="padre">
+      <h1>{"EWebik mejorando el rendimiento con React.memo()"}</h1>
+      <div className="hijos">
+        <Counter
+          title={"No memorizado"}
+          counter={counter1}/>
+
+        <CounterMemo
+          title={"Memorizado"}
+          counter={counter2}/>
+
+        <CounterMemo1
+          data={{
+            title:"Memorizado 2do nivel",
+            counter:counter3
+          }} />
+      </div>
+    </div>
+  )
+}
+
+
 ReactDOM.render(
-  <Counter />,
+  <Component />,
   document.getElementById('root')
 );
 // If you want your app to work offline and load faster, you can change
