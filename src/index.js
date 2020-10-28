@@ -1,10 +1,11 @@
-import React,{useEffect, useReducer, useState} from 'react';
+import React,{useEffect, useCallback, useState, useMemo} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-//HOC React.memo()
+//Hook useCallback y useMemo
+//React.memo
 
 const Counter = (props)=>{
   const {counter, title}=props;
@@ -17,76 +18,110 @@ const Counter = (props)=>{
   )
 }
 
-//Declaración
-//React.memo(<Component />, ()=>{})
-
-const CounterMemo = React.memo(
-  (props)=>{
-    return(
-      <Counter {...props} />
-    )
-});
-
-//Diferenciación manual de propiedades
-//React.memo(<Component />, ()=>{})
-const CounterMemo1 = React.memo(
-  (props)=>{
-    const {data} = props;
-    return(
-      <Counter 
-        title={data.title}
-        counter={data.counter} />
-    )
-},(prevProps, nextProps)=>{
-  //Si retornamos true:  No se renderiza
-  //Si retornamos false: Si se renderiza
-  return (
-    prevProps.data.title === nextProps.data.title &&
-    prevProps.data.counter === nextProps.data.counter
+const List = (props)=>{
+  const{list,handleDelete}=props;
+  return(
+    <div className="hijo">
+      <h2>{"Lista memorizada"}</h2>
+      <p>{"Último render: " + new Date().getMilliseconds()}</p>
+      {
+        list.map((item)=>(
+          <div key={item.id}>
+            <span style={{marginRight:10}}>
+              {`Id: ${item.id}, Nombre: ${item.nombre}`}
+            </span>
+            <button onClick={()=>{
+              handleDelete(item.id)
+            }}>{"Eliminar"}</button>
+          </div>
+        ))
+      }
+    </div>
   )
-});
+}
 
+const ListMemo = React.memo(
+  (props)=>{
+    return(
+      <List {...props} />
+    )
+  }
+)
 
 const Component = ()=>{
   const [counter1, setCounter1] = useState(0);
-  const [counter2, setCounter2] = useState(0);
-  const [counter3, setCounter3] = useState(0);
+  const [list, setList] = useState([]);
+  const [id, setId] = useState(0);
+  const [update, setUpdate] = useState(0);
 
   useEffect(()=>{
-    setTimeout(() => {
+    let interval = setInterval(() => {
       setCounter1(counter1 + 1);
-    }, 100);
+      if(counter1 >= 1000){
+        let tList = list;
+        tList.push({
+          id:id,
+          nombre:"Producto"+id
+        });
+        setList(tList);
+        setId(id + 1);
+        setCounter1(0);
+        setUpdate(!update);
+      }
+    }, 1);
+    return ()=>{
+      clearInterval(interval);
+    }
   },[counter1]);
 
-  useEffect(()=>{
-    setTimeout(() => {
-      setCounter2(counter2 + 1);
-    }, 4000);
-  },[counter2]);
+  //Declaración
+  //useCallback(()=>{},[]);
 
-  useEffect(()=>{
-    setTimeout(() => {
-      setCounter3(counter3 + 1);
-    }, 500);
-  },[counter3]);
+  const handleDeleteCallback = useCallback(
+    (id)=>{
+      const tList = list.filter((item)=>{
+        return item.id !== id
+      });
+      setList(tList);
+      setUpdate(!update);
+    },[list]);
+
+    const handleDelete =
+      (id)=>{
+        const tList = list.filter((item)=>{
+          return item.id !== id
+        });
+        setList(tList);
+        setUpdate(!update);
+      };
+
+  //useMemo
+  const listUseMemo = useMemo(
+    ()=>
+    <List
+      list={list}
+      update={update}
+      handleDelete={handleDelete} />
+  ,[update]);
 
   return(
     <div className="padre">
-      <h1>{"EWebik mejorando el rendimiento con React.memo()"}</h1>
+      <h1>{"EWebik mejorando el rendimiento useCallback y useMemo"}</h1>
       <div className="hijos">
         <Counter
           title={"No memorizado"}
           counter={counter1}/>
-
-        <CounterMemo
-          title={"Memorizado"}
-          counter={counter2}/>
-
-        <CounterMemo1
-          data={{
-            title:"Memorizado 2do nivel",
-            counter:counter3
-          }} />
+      </div>
+      <div className="hijos">
+      <ListMemo
+        list={list}
+        update={update}
+        handleDelete={handleDeleteCallback} />
+      </div>
+      <div className="hijos">
+        {
+          listUseMemo
+        }
       </div>
     </div>
   )
