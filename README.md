@@ -138,3 +138,11 @@ En este capítulo te enseñaré como puedes mejorar el rendimiento de tus aplica
 Rama: react-memo
 
 Link detalles: https://ewebik.com/react-js/react-memo
+
+## Capítulo 18 Utilizando los Hooks useCallback y useMemo
+
+En este capítulo te enseñaré a memorizar funciones, además, veremos una segunda opción de cómo puedes memorizar componentes a través del Hook useMemo.
+
+Rama: usecallback
+
+Link detalles: https://ewebik.com/react-js/usecallback
